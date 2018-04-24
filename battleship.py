@@ -50,12 +50,14 @@ def add_ship (ship, s_row, s_col):
 
 def hit_ship (ship, ship_row,ship_col, guess_row, guess_col):
     f = False
-    outside = (guess_row < 0 or guess_row > board_size - 1) or (guess_col < 0 or guess_col > board_size - 1)
+    outside = (guess_row < 0 or guess_row > board_size - 1) or \
+    (guess_col < 0 or guess_col > board_size - 1)
     if outside:
       print "Oops, that's not even in the ocean."
     else:
         for i in range (ship[3]):
-            if guess_row == ship_row[i] and guess_col == ship_col[i] and (board[guess_row][guess_col] != "X" or board[guess_row][guess_col] != "*"):
+            if guess_row == ship_row[i] and guess_col == ship_col[i] \
+             and (board[guess_row][guess_col] != "X" and board[guess_row][guess_col] != "*"):
                 print "You hit my battleship."
                 board[guess_row][guess_col] = "*"
                 print_board(board)
@@ -73,16 +75,10 @@ def hit_ship (ship, ship_row,ship_col, guess_row, guess_col):
     return f
 
 
-
-#ship_row = random_row(board)
-#ship_col = random_col(board)
 ship = one_ship (ship_size, board)
-#ship_row.append (ship[0])
-#ship_col.append (ship[1])
 add_ship (ship, ship_row, ship_col)
 
 #debugging
-#print range(ship[3]-1)
 print ship
 print ship_row ,
 print ship_col
@@ -93,18 +89,11 @@ for turn in range(turns):
   print "Turn", turn + 1
   guess_row = int(raw_input("Guess Row: "))
   guess_col = int(raw_input("Guess Col: "))
-
   hit_ship (ship, ship_row,ship_col, guess_row, guess_col)
-  #if hit_ship (ship, ship_row,ship_col, guess_row, guess_col) == False:
-    #  print "You missed my battleship!"
-     # board[guess_row][guess_col] = "X"
-      #print_board(board)
-
   if turn == turns - 1:
     print "Game Over"
 
 print
-
 for i in range(ship[3]):
     if board[ship_row[i]][ship_col[i]] != '*':
         board[ship_row[i]][ship_col[i]] = "S"
